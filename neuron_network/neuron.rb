@@ -24,10 +24,10 @@ class Neuron
 
   def study(speed_of_studying, error)
     @number_of_inputs.times{ |iteration|
-      @weights[iteration] += error * speed_of_studying * @input[iteration]# * @weights[iteration].abs
+      @weights[iteration] += error * speed_of_studying * @input[iteration]
     }
 
-    @threshold += error * speed_of_studying * 1
+    @threshold += error * speed_of_studying
   end
 
   def func(x)
