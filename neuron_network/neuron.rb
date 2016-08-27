@@ -17,17 +17,20 @@ class Neuron
     else
       return Exception.new 'Number of inputs is wrong'
     end
+
     @result = func @sum
 
-    @result
   end
 
   def study(speed_of_studying, error)
+
+    vector_of_studying = error * speed_of_studying
+
     @number_of_inputs.times{ |iteration|
-      @weights[iteration] += error * speed_of_studying * @input[iteration]
+      @weights[iteration] += vector_of_studying * @input[iteration]
     }
 
-    @threshold += error * speed_of_studying
+    @threshold += vector_of_studying
   end
 
   def func(x)

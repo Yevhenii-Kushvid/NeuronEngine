@@ -13,6 +13,7 @@ class Teacher
     if inputs.size == answers.size
       inputs.size.times { |iteration|
         error = answers[iteration] - neuron.solv(inputs[iteration])
+        error = - 2 * ( neuron.solv(inputs[iteration]) - answers[iteration] )
         neuron.study(@speed_of_teaching, error)
       }
       true
