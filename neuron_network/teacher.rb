@@ -13,7 +13,7 @@ class Teacher
     if inputs.size == answers.size
       inputs.size.times { |iteration|
 
-        # error = answers[iteration] - neuron.solv(inputs[iteration])
+        # error = neuron.solv(inputs[iteration]) - answers[iteration]
         error = -2 * ( answers[iteration] - neuron.solv(inputs[iteration]))
 
         neuron.study(@speed_of_teaching, error)
@@ -32,8 +32,8 @@ class Teacher
       row_number = problem_points[iteration][0]
       position_in_row = problem_points[iteration][1]
 
-      # error = neuron.solv([row_number, position_in_row]) - solved_problem[row_number][position_in_row]
-      error = -2 * ( solved_problem[row_number][position_in_row] - neuron.solv([row_number, position_in_row]))
+      error = neuron.solv([row_number, position_in_row]) - solved_problem[row_number][position_in_row]
+      # error = -2 * ( solved_problem[row_number][position_in_row] - neuron.solv([row_number, position_in_row]))
 
       puts "ERROR = #{error}"
       neuron.study(@speed_of_teaching, error)
