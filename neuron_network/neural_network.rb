@@ -2,6 +2,8 @@ require './neuron_network/neuron'
 
 class NeuralNetwork
 
+  attr_accessor :structure
+
   # structure = [ 2, 1 ]
   # result = Array of Neurons [ [Neuron], [Neuron, Neuron]]
   def initialize(number_of_inputs, structure)
@@ -21,6 +23,8 @@ class NeuralNetwork
       end # end of layer_amount
 
     end # end of structure
+
+    @result = 0
   end #end of initialize
 
   def solv(input)

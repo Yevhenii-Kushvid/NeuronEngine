@@ -1,4 +1,5 @@
 class Neuron
+  attr_reader :number_of_inputs
 
   def initialize(number_of_inputs, threshold = 0.1)
     @threshold = threshold
@@ -19,7 +20,8 @@ class Neuron
     end
 
     @result = func @sum
-
+    puts "#{input} == #{@result}"
+    @result
   end
 
   def study(speed_of_studying, error)
@@ -27,15 +29,21 @@ class Neuron
     vector_of_studying = error * speed_of_studying
 
     @number_of_inputs.times{ |iteration|
-      @weights[iteration] += vector_of_studying * @input[iteration]
+      @weights[iteration] -= vector_of_studying * @input[iteration]
     }
 
-    @threshold += vector_of_studying
+    @threshold -= vector_of_studying
   end
 
   def func(x)
     sign x
+    # Math::sin x
   end
+
+  def derivation x
+    # Math::cos x
+  end
+
 
   private
 
