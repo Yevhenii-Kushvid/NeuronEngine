@@ -1,4 +1,5 @@
 require './neuron_network/neuron.rb'
+require './neuron_network/neural_network.rb'
 require './neuron_network/teacher.rb'
 require './helpers/converter.rb'
 
@@ -17,9 +18,9 @@ inputs = [
 ]
 answers = [
      -1,
-     -1,
       1,
-      1
+      1,
+     -1
 ]
 
 # it can study for figures
@@ -114,34 +115,60 @@ solved_problem = [
 # puts "\nTEST\n"
 # puts teacher.test(neuron, inputs, answers)
 
-
 #####################################
 #   TEACH NEURON FOR MATRIX IMAGE
 #####################################
 
-hash_of_problem = Converter.martix_to_hash_of_points problem
-p hash_of_problem
+# hash_of_problem = Converter.martix_to_hash_of_points problem
+# p hash_of_problem
+#
+# hash_of_solved_problem = Converter.martix_to_hash_of_points solved_problem
+# p teacher.test_matrix(neuron, hash_of_problem, solved_problem)
+#
+# puts "\nTeach\n"
+# result = false
+# while(not result)
+#   teacher.teach_matrix(neuron, hash_of_problem, hash_of_solved_problem)
+#   puts "================================================================"
+#   p neuron
+#   puts "================================================================"
+#   result = true
+#   results_by_points = teacher.test_matrix(neuron, hash_of_problem, hash_of_solved_problem)
+#
+#   results_by_points.each {|point_result|
+#     result = false unless point_result
+#   }
+#   p results_by_points
+# end
+#
+# puts "\nAfter\n"
+# p neuron
+#
+# p teacher.test_matrix(neuron, hash_of_problem, solved_problem)
 
-hash_of_solved_problem = Converter.martix_to_hash_of_points solved_problem
-p teacher.test_matrix(neuron, hash_of_problem, solved_problem)
+#####################################
+#   TEACH NEURAL NETWORK FOR MATRIX IMAGE
+#####################################
 
-puts "\nTeach\n"
+neural_network = NeuralNetwork.new(structure: [2,1])
+
+# p neural_network.solv inputs.first
+p teacher.test_neural_network neural_network, inputs, answers
+
 result = false
 while(not result)
-  teacher.teach_matrix(neuron, hash_of_problem, hash_of_solved_problem)
-  puts "================================================================"
-  p neuron
-  puts "================================================================"
+# 4_000.times do
+  teacher.teach_neural_network(neural_network, inputs, answers)
+
   result = true
-  results_by_points = teacher.test_matrix(neuron, hash_of_problem, hash_of_solved_problem)
+  results_by_points = teacher.test_neural_network(neural_network, inputs, answers)
 
   results_by_points.each {|point_result|
     result = false unless point_result
   }
+
   p results_by_points
+  p neural_network.structure.first
 end
 
-puts "\nAfter\n"
-p neuron
-
-p teacher.test_matrix(neuron, hash_of_problem, solved_problem)
+p teacher.test_neural_network neural_network, inputs, answers
