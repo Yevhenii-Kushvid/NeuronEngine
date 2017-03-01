@@ -19,7 +19,7 @@ class Teacher
         neuron.study(@speed_of_teaching, error)
       }
       true
-    else
+    elsetest_neural_network
       return Exception.new('Amount of incoming inputs and answers are need to be eql.')
     end
 
